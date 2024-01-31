@@ -1,0 +1,55 @@
+from os import walk
+
+classes_in = ['tank', 'apc', 'helicopters', 'desert']
+classes = ['tank', 'apc', 'helicopters']
+
+data_folder = r'data/'
+num_classes = len(classes)
+image_shape = 100
+save_every = 1000
+batch_size = 256
+epochs = 90
+file_count = sum(len(files) for _, _, files in walk(data_folder))
+validation_split = 0.3
+training_files_count = file_count * (1 - validation_split)
+num_of_batches = int(epochs * training_files_count / batch_size) + 19
+epoch_size = int(training_files_count / batch_size)
+save_every = min(save_every, epoch_size)
+show_last_x_batches = max(save_every, int(num_of_batches * .05))
+learning_rate = .5e-6
+
+Model: "costume_model"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ input_3 (InputLayer)        [(None, 100, 100, 3)]     0         
+                                                                 
+ lambda_2 (Lambda)           (None, 100, 100, 3)       0         
+                                                                 
+ conv2d_2 (Conv2D)           (None, 98, 98, 128)       3584      
+                                                                 
+ max_pooling2d_2 (MaxPooling  (None, 49, 49, 128)      0         
+ 2D)                                                             
+                                                                 
+ flatten_2 (Flatten)         (None, 307328)            0         
+                                                                 
+ dense_14 (Dense)            (None, 1024)              314704896 
+                                                                 
+ dense_15 (Dense)            (None, 256)               262400    
+                                                                 
+ dense_16 (Dense)            (None, 128)               32896     
+                                                                 
+ dense_17 (Dense)            (None, 64)                8256      
+                                                                 
+ dense_18 (Dense)            (None, 32)                2080      
+                                                                 
+ dense_19 (Dense)            (None, 16)                528       
+                                                                 
+ dense_20 (Dense)            (None, 3)                 51        
+                                                                 
+=================================================================
+Total params: 315,014,691
+Trainable params: 315,014,691
+Non-trainable params: 0
+_________________________________________________________________
+{'precision': 0.8826574, 'recall': 0.86145556, 'accuracy': 0.88227296, 'f1_score': 0.8719276205890635, 'loss': 0.1927959670679054}

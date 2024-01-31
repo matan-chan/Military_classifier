@@ -4,6 +4,6 @@ models/*
 logs/ckpt-90.data-00000-of-00001
 logs/ckpt-90.index
 logs/checkpoint
-data/*
+
 output/*
 test/*
