@@ -239,5 +239,3 @@ class MilitaryClassifier:
         encodes = np.argmax(results, axis=1)
         encodes[~row_contains_higher_than_thresh_hold] = -1
         return encodes
-
-

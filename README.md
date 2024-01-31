@@ -26,13 +26,7 @@ mc.train()
 
 <p align="left">
   <img width="200" src="https://github.com/matan-chan/Military_classifier/blob/main/examples/helicopter.png?raw=true">
-</p>
-
-<p align="left">
   <img width="200" src="https://github.com/matan-chan/Military_classifier/blob/main/examples/tank.png?raw=true">
-</p>
-
-<p align="left">
   <img width="200" src="https://github.com/matan-chan/Military_classifier/blob/main/examples/apc.png?raw=true">
 </p>
 
