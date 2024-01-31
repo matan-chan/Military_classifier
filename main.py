@@ -240,32 +240,4 @@ class MilitaryClassifier:
         encodes[~row_contains_higher_than_thresh_hold] = -1
         return encodes
 
-    @staticmethod
-    def move_to(images, encodes, name):
-        for i, encode in enumerate(encodes):
-            if encode != -1:
-                des_dir = classes[encode]
-            else:
-                des_dir = 'none'
-            cv2.imwrite(f'output/{des_dir}/{name}', images[i])
 
-    def predict(self):
-        clean_last_train(['output/tank', 'output/apc', 'output/helicopters', 'output/desert'])
-        directory_path = f'test'
-        correct = 0
-        sum = 0
-        for d in os.listdir(directory_path):
-            for f in os.listdir(f'{directory_path}/{d}'):
-                try:
-                    image = cv2.imread(f'{directory_path}/{d}/{f}')
-                    images = np.array([image])
-                    pi = preprocess_images(images)
-                    pi = tf.reverse(pi, axis=[-1])
-                    encodes = self.classify(pi)
-                    sum += 1
-                    if classes[encodes[0]] == d:
-                        correct += 1
-                    self.move_to(images, encodes, f)
-                except:
-                    print('fail')
-        print(correct / sum * 100)
